@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<body>
+<header class="header--main-page" th:fragment="pageheader">
+    <nav class="container container--70">
+        <ul class="nav--actions">
+            <li><a href="" class="btn btn--small btn--without-border" th:text="#{header.login}">Zaloguj</a></li>
+            <li><a href="#" class="btn btn--small btn--highlighted" th:text="#{header.create.account}">Załóż konto</a>
+            </li>
+        </ul>
+
+        <ul>
+            <li><a href="#" class="btn btn--without-border active" th:text="#{header.start}">Start</a></li>
+            <li><a href="#" class="btn btn--without-border" th:text="#{header.what.is.it}">O co chodzi?</a></li>
+            <li><a href="#" class="btn btn--without-border" th:text="#{header.about.us}">O nas</a></li>
+            <li><a href="#" class="btn btn--without-border" th:text="#{header.foundation.organization}">
+                Fundacje i organizacje</a></li>
+            <li><a href="#" class="btn btn--without-border" th:text="#{header.contact}">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            <h1 th:text="#{header.start.help}">Zacznij pomagać!</h1><br>
+            <h1 th:text="#{header.start.help.subtitle}">Oddaj niechciane rzeczy w zaufane ręce</h1>
+
+        </div>
+    </div>
+</header>
+</body>
+</html>
