@@ -2,7 +2,6 @@ package pl.damianrowinski.charity.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Donation;
 import pl.damianrowinski.charity.domain.repositories.DonationRepository;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
@@ -36,7 +35,7 @@ public class DonationService {
         donationRepository.save(donationUpdated);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         Donation donation = findById(id);
         donationRepository.delete(donation);
     }
@@ -45,9 +44,8 @@ public class DonationService {
         return donationRepository.findAll();
     }
 
-
-
-
-
+    public long countDonations() {
+        return donationRepository.count();
+    }
 
 }

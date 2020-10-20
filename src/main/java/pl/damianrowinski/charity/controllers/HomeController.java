@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.entities.Institution;
+import pl.damianrowinski.charity.services.DonationService;
 import pl.damianrowinski.charity.services.InstitutionService;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
     private final InstitutionService institutionService;
+    private final DonationService donationService;
 
     @ModelAttribute("institutionsPairsList")
     public List<List<Institution>> institutionsList() {
@@ -30,8 +32,17 @@ public class HomeController {
                 instPairList.add(institutionsPair);
             }
         }
-
         return instPairList;
+    }
+
+    @ModelAttribute("countDonations")
+    public long countDonations() {
+        return donationService.countDonations();
+    }
+
+    @ModelAttribute("countInstitutions")
+    public long countInstitutions() {
+        return institutionService.countInstitutions();
     }
 
     @RequestMapping("/")

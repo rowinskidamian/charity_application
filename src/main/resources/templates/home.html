@@ -13,16 +13,15 @@
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>13</em>
-
-            <h3 th:text="#{home.bags}">Oddanych worków</h3>
-            <p th:text="#{home.bags.subtitle}">To jest podtytuł dla oddanych worków, w języku polskim.</p>
+            <em th:text="${countDonations}"></em>
+            <h3 th:text="#{home.donations}">Przekazanych darów</h3>
+            <p th:text="#{home.donations.subtitle}">To jest podtytuł, w języku polskim, dla tytułu "przekazanych darów".</p>
         </div>
 
         <div class="stats--item">
-            <em>5</em>
-            <h3 th:text="#{home.gifts}">Przekazanych darów</h3>
-            <p th:text="#{home.gifts.subtitle}">To jest podtytuł, w języku polskim, dla tytułu "przekazanych darów".</p>
+            <em th:text="${countInstitutions}"></em>
+            <h3 th:text="#{home.institutions}">Wspartych organizacji</h3>
+            <p th:text="#{home.institutions.subtitle}">To jest podtytuł, w języku polskim, dla tytułu "wspartych organizacji".</p>
         </div>
 
     </div>
