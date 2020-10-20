@@ -24,6 +24,8 @@ public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @ManyToMany

@@ -43,7 +43,5 @@ public class InstitutionService {
         return institutionRepository.findAll();
     }
 
-    public long countInstitutions() {
-        return institutionRepository.count();
-    }
+
 }

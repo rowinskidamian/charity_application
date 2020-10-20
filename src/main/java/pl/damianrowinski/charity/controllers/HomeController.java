@@ -40,9 +40,9 @@ public class HomeController {
         return donationService.countDonations();
     }
 
-    @ModelAttribute("countInstitutions")
-    public long countInstitutions() {
-        return institutionService.countInstitutions();
+    @ModelAttribute("countBags")
+    public long countBags() {
+        return donationService.countBags();
     }
 
     @RequestMapping("/")

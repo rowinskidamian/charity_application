@@ -48,4 +48,11 @@ public class DonationService {
         return donationRepository.count();
     }
 
+    public int countBags() {
+        List<Donation> donationList = findAll();
+        return donationList.stream()
+                .map(Donation::getQuantity)
+                .reduce(0, Integer::sum);
+    }
+
 }
