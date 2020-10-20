@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Oddam w dobre ręce</title>
+    <title>Formularz przekazania daru</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -13,17 +13,10 @@
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em th:text="${countDonations}"></em>
-            <h3 th:text="#{home.donations}">Przekazanych darów</h3>
-            <p th:text="#{home.donations.subtitle}">To jest podtytuł, w języku polskim, dla tytułu "przekazanych darów".</p>
+            <h3 th:text="#{form.title}">Formularz przekazania darów</h3>
+            <p th:text="#{form.subtitle}">Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy wiedzieć,
+            komu je najlepiej przekazać.</p>
         </div>
-
-        <div class="stats--item">
-            <em th:text="${countBags}"></em>
-            <h3 th:text="#{home.bags}">Worów z darami</h3>
-            <p th:text="#{home.bags.subtitle}">Zbieramy kolejne dary cały czas, przekaż wór z darami już dziś!</p>
-        </div>
-
     </div>
 </section>
 
@@ -52,8 +45,6 @@
             <p th:text="#{home.courier.time}">kurier przyjedzie w dogodnym terminie</p>
         </div>
     </div>
-
-    <a th:href="@{/donation/form}" class="btn btn--large" th:text="#{home.give.gift}">Kliknij i przekaż dar</a>
 </section>
 
 <section class="about-us">

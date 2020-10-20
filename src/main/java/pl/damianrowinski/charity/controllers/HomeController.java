@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-
 @RequiredArgsConstructor
 public class HomeController {
     private final InstitutionService institutionService;
