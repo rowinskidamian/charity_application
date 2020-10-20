@@ -2,9 +2,7 @@ package pl.damianrowinski.charity.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Institution;
-import pl.damianrowinski.charity.domain.repositories.CategoryRepository;
 import pl.damianrowinski.charity.domain.repositories.InstitutionRepository;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
@@ -21,7 +19,7 @@ public class InstitutionService {
 
     public Institution findById(Long id) {
         Optional<Institution> optionalInstitution = institutionRepository.findById(id);
-        if(optionalInstitution.isEmpty()) throw new ObjectNotFoundException("Institution not found");
+        if(optionalInstitution.isEmpty()) throw new ObjectNotFoundException("not.found.institution");
         return optionalInstitution.get();
     }
 
@@ -30,18 +28,14 @@ public class InstitutionService {
     }
 
     public void update(Institution institutionUpdateData) {
-        Optional<Institution> optionalInstitution = institutionRepository.findById(institutionUpdateData.getId());
-        if(optionalInstitution.isEmpty()) throw new ObjectNotFoundException("Institution not found");
-        Institution institutionToUpdate = optionalInstitution.get();
+        Institution institutionToUpdate = findById(institutionUpdateData.getId());
         institutionToUpdate.setName(institutionUpdateData.getName());
         institutionToUpdate.setDescription(institutionUpdateData.getDescription());
         institutionRepository.save(institutionToUpdate);
     }
 
     public void delete(Long id){
-        Optional<Institution> optionalInstitution = institutionRepository.findById(id);
-        if(optionalInstitution.isEmpty()) throw new ObjectNotFoundException("Institution not found");
-        Institution institution = optionalInstitution.get();
+        Institution institution = findById(id);
         institutionRepository.delete(institution);
     }
 

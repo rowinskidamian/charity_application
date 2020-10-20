@@ -19,7 +19,7 @@ public class CategoryService {
 
     public Category findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("Category not found");
+        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.category");
         return optionalCategory.get();
     }
 
@@ -27,18 +27,14 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public void update(Category categoryUpdateData) {
-        Optional<Category> optionalCategory = categoryRepository.findById(categoryUpdateData.getId());
-        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("Category not found");
-        Category categoryToUpdate = optionalCategory.get();
-        categoryToUpdate.setName(categoryUpdateData.getName());
+    public void update(Category categoryUpdate) {
+        Category categoryToUpdate = findById(categoryUpdate.getId());
+        categoryToUpdate.setName(categoryUpdate.getName());
         categoryRepository.save(categoryToUpdate);
     }
 
     public void delete(Long id){
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("Category not found");
-        Category category = optionalCategory.get();
+        Category category = findById(id);
         categoryRepository.delete(category);
     }
 

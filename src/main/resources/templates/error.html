@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header class="header--main-page" th:include="fragments/header :: pageheader"></header>
+
+<section class="steps">
+    <div class="steps--container">
+        <div class="steps--item" >
+            <h3 th:text="#{error}">Błąd</h3>
+            <p th:text="#{${errorMsg}}">Wystąpił błąd na stronie.</p>
+        </div>
+    </div>
+
+    <a href="#" class="btn btn--large" th:text="#{home.create.account}">Załóż konto</a>
+</section>
+
+<footer th:include="fragments/footer :: pagefooter"></footer>
+
+<script th:src="@{/js/app.js}"></script>
+
+</body>
+</html>
