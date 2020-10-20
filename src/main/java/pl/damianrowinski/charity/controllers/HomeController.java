@@ -2,26 +2,27 @@ package pl.damianrowinski.charity.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import pl.damianrowinski.charity.services.CategoryService;
+import org.springframework.web.bind.annotation.*;
+import pl.damianrowinski.charity.domain.entities.Institution;
+import pl.damianrowinski.charity.services.InstitutionService;
+
+import java.util.List;
 
 @Controller
-@RequestMapping("/")
+
 @RequiredArgsConstructor
 public class HomeController {
-    private final CategoryService categoryService;
+    private final InstitutionService institutionService;
 
-    @GetMapping
+    @ModelAttribute("institutionsList")
+    public List<Institution> institutionsList() {
+        return institutionService.findAll();
+    }
+
+    @RequestMapping("/")
     public String homePage() {
         return "home";
     }
 
-    @GetMapping("exception")
-    @ResponseBody
-    public String exception(@RequestParam Long id) {
-        return categoryService.findById(id).toString();
-    }
+
 }

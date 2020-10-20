@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Entity
 @Transactional
-@Table(name = Category.TABLE_NAME)
+@Table(name = Institution.TABLE_NAME)
 @Getter
 @Setter
 @ToString
