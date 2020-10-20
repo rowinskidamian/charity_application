@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.services.InstitutionService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -14,9 +15,23 @@ import java.util.List;
 public class HomeController {
     private final InstitutionService institutionService;
 
-    @ModelAttribute("institutionsList")
-    public List<Institution> institutionsList() {
-        return institutionService.findAll();
+    @ModelAttribute("institutionsPairsList")
+    public List<List<Institution>> institutionsList() {
+        List<Institution> allInstitutions = institutionService.findAll();
+        List<Institution> institutionsPair = new ArrayList<>();
+        List<List<Institution>> instPairList = new ArrayList<>();
+
+        for (int i = 1; i <= allInstitutions.size(); i++) {
+            if(i%2 != 0) {
+                institutionsPair = new ArrayList<>();
+                institutionsPair.add(allInstitutions.get(i-1));
+            } else {
+                institutionsPair.add(allInstitutions.get(i-1));
+                instPairList.add(institutionsPair);
+            }
+        }
+
+        return instPairList;
     }
 
     @RequestMapping("/")
