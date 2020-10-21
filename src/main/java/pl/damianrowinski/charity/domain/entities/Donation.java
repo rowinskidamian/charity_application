@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,5 +70,9 @@ public class Donation {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Donation() {
+        categories = new ArrayList<>();
     }
 }

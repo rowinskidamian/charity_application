@@ -24,39 +24,56 @@
         <p class="form--steps-counter">Krok 1/4</p>
         <form action="/donation/form" method="post" th:object="${donation}">
             <fieldset>
-                <div>
-                    <label th:text="#{form.category}">Kategoria: </label>
+                <div class="form-group--checkbox">
+                    <h3 th:text="#{form.category}">Kategoria: </h3>
                     <ul>
                         <li th:each="category : ${categoryList}">
                             <label th:for="categories" th:text="${category.name}"></label>
-                            <input type="checkbox" th:field="*{categories}" th:value="${category}"/>
+                            <input type="checkbox" th:field="*{categories}" th:value="${category.id}"/>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <label th:text="#{form.bags}">Podaj liczbę 60l worków, w które spakowałeś rzeczy: </label>
+                    <h3 th:text="#{form.bags}">Podaj liczbę 60l worków, w które spakowałeś rzeczy: </h3>
                     <label th:for="quantity" th:text="#{form.bags.input}">Liczba 60l worków:</label>
                     <input type="number" th:field="*{quantity}"/>
                 </div>
                 <div>
-                    <label th:text="#{form.organisations}">Wybierz organizacje, którym chcesz pomóc:</label>
+                    <h3 th:text="#{form.organisations}">Wybierz organizacje, którym chcesz pomóc:</h3>
                     <ul>
                         <li th:each="currentInst : ${institutionList}">
                             <label th:for="institution" th:text="${currentInst.name}"></label>
-                            <input type="radio" th:field="*{institution}" th:value="${currentInst}"/>
+                            <input type="radio" th:field="*{institution}" th:value="${currentInst.id}"/>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <label th:text="#{form.address}">Adres odbioru: </label>
+                    <h2 th:text="#{form.address}">Adres odbioru: </h2><br>
+
                     <label th:for="streetName" th:text="#{form.street}">Ulica</label>
-                    <input type="text" th:field="*{streetName}"/>
+                    <input type="text" th:field="*{streetName}"/><br>
+
                     <label th:for="city" th:text="#{form.city}">Miasto</label>
-                    <input type="text" th:field="*{city}"/>
+                    <input type="text" th:field="*{city}"/><br>
+
                     <label th:for="zipCode" th:text="#{form.zip.code}">Kod pocztowy</label>
-                    <input type="text" th:field="*{zipCode}"/>
+                    <input type="text" th:field="*{zipCode}"/><br>
+
                     <label th:for="phoneNumber" th:text="#{form.phone}">Numer telefonu</label>
                     <input type="text" th:field="*{phoneNumber}"/>
+                </div>
+                <div>
+                    <label th:text="#{form.pickup}">Termin odbioru: </label><br>
+
+                    <label th:for="pickUpDate" th:text="#{form.pickup.date}">Data</label>
+                    <input type="text" th:field="*{pickUpDate}" placeholder="rrrr-mm-dd"/><br>
+
+                    <label th:for="pickUpTime" th:text="#{form.pickup.time}">Godzina</label>
+                    <input type="text" th:field="*{pickUpTime}" placeholder="gg:mm"/><br>
+
+                    <label th:for="comment" th:text="#{form.pickup.comments}">Uwagi dla kuriera</label>
+                    <textarea cols="10" rows="4" th:field="*{comment}"></textarea>
+
                 </div>
 
                 <div>

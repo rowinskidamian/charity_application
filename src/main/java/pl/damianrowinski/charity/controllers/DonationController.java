@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Donation;
@@ -32,7 +33,7 @@ public class DonationController {
     }
 
     @PostMapping("/donation/form")
-    public String sendForm(Donation donation) {
+    public String sendForm(@ModelAttribute("donation") Donation donation) {
         donationService.add(donation);
         return "redirect:/";
     }
