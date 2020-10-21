@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -34,15 +35,23 @@ public class Donation {
     @ManyToOne
     private Institution institution;
 
+    @Column(name = "street_name", nullable = false)
+    private String streetName;
+
     @Column(name = "city", nullable = false)
     private String city;
 
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "pick_up_date", nullable = false)
     private LocalDate pickUpDate;
 
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "pick_up_time", nullable = false)
     private LocalTime pickUpTime;
 
