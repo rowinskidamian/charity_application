@@ -8,7 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<header class="header--main-page" th:include="fragments/header :: pageheader"></header>
+
+<header class="header--form-page" th:include="fragments/form_header :: pageheader"></header>
 
 <section class="form--steps">
     <div class="form--steps-instructions">
@@ -22,9 +23,11 @@
 <section class="form-section">
     <div class="form--steps">
         <p class="form--steps-counter">Krok 1/4</p>
-        <form action="/donation/form" method="post" th:object="${donation}">
+    </div>
+    <div class="form-group">
+        <form action="/donation/form" method="post" th:object="${donation}" class="form">
             <fieldset>
-                <div class="form-group--checkbox">
+                <div>
                     <h3 th:text="#{form.category}">Kategoria: </h3>
                     <ul>
                         <li th:each="category : ${categoryList}">
