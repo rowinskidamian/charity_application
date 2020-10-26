@@ -43,7 +43,6 @@ public class CategoryService {
 
     public List<CategoryResource> findAll() {
         List<Category> categoryList = categoryRepository.findAll();
-        List<CategoryResource> categoryResourceList = categoryAssembler.getResourceList(categoryList);
-        return categoryResourceList;
+        return categoryAssembler.getResourceList(categoryList);
     }
 }
