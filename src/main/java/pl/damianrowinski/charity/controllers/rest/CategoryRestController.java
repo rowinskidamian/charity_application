@@ -18,6 +18,12 @@ public class CategoryRestController {
         return categoryService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public CategoryResource getSingleCategory(@PathVariable Long id){
+
+        return categoryService.findById(id);
+    }
+
     @PostMapping()
     public CategoryResource saveCategory(@RequestBody CategoryResource categoryResource) {
         return categoryService.add(categoryResource);

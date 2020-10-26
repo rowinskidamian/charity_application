@@ -20,10 +20,10 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryAssembler categoryAssembler;
 
-    public Category findById(Long id) {
+    public CategoryResource findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.category");
-        return optionalCategory.get();
+        return categoryAssembler.getCategoryResource(optionalCategory.get());
     }
 
     public CategoryResource add(CategoryResource categoryResource) {
@@ -32,15 +32,17 @@ public class CategoryService {
         return categoryAssembler.getCategoryResource(savedCategory);
     }
 
-    public void update(Category categoryUpdate) {
-        Category categoryToUpdate = findById(categoryUpdate.getId());
-        categoryToUpdate.setName(categoryUpdate.getName());
-        categoryRepository.save(categoryToUpdate);
+    public void update(CategoryResource categoryUpdate) {
+        CategoryResource categoryData = findById(categoryUpdate.getId());
+        categoryData.setName(categoryUpdate.getName());
+        Category categoryUpdated = categoryAssembler.getCategory(categoryData);
+        categoryRepository.save(categoryUpdated);
     }
 
     public void delete(Long id){
-        Category category = findById(id);
-        categoryRepository.delete(category);
+        CategoryResource categoryData = findById(id);
+        Category categoryToDelete = categoryAssembler.getCategory(categoryData);
+        categoryRepository.delete(categoryToDelete);
     }
 
     public List<CategoryResource> findAll() {
