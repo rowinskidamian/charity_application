@@ -1,6 +1,7 @@
 package pl.damianrowinski.charity.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.entities.Institution;

@@ -75,7 +75,7 @@
             współpracujemy. Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <li th:each="institutionsPair : ${institutionsPairsList}">
+            <li th:each="institutionsPair, stat : ${institutionsPairsList}">
                 <div class="col" th:each="institution : ${institutionsPair}">
                     <div class="title" th:text="#{foundation.name} + ' ' + ${institution.getName()}"></div>
                     <div class="subtitle" th:text="#{foundation.mission} + ' ' +${institution.getDescription()}"></div>
