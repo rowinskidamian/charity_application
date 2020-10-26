@@ -2,8 +2,10 @@ package pl.damianrowinski.charity.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.damianrowinski.charity.assemblers.CategoryAssembler;
 import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.repositories.CategoryRepository;
+import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
 import javax.transaction.Transactional;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final CategoryAssembler categoryAssembler;
 
     public Category findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
@@ -38,7 +41,9 @@ public class CategoryService {
         categoryRepository.delete(category);
     }
 
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<CategoryResource> findAll() {
+        List<Category> categoryList = categoryRepository.findAll();
+        List<CategoryResource> categoryResourceList = categoryAssembler.getResourceList(categoryList);
+        return categoryResourceList;
     }
 }
