@@ -32,11 +32,12 @@ public class CategoryService {
         return categoryAssembler.getCategoryResource(savedCategory);
     }
 
-    public void update(CategoryResource categoryUpdate) {
+    public CategoryResource update(CategoryResource categoryUpdate) {
         CategoryResource categoryData = findById(categoryUpdate.getId());
         categoryData.setName(categoryUpdate.getName());
         Category categoryUpdated = categoryAssembler.getCategory(categoryData);
-        categoryRepository.save(categoryUpdated);
+        Category savedCategory = categoryRepository.save(categoryUpdated);
+        return categoryAssembler.getCategoryResource(savedCategory);
     }
 
     public void delete(Long id){

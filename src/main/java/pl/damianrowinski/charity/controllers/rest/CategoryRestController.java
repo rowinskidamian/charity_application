@@ -29,4 +29,10 @@ public class CategoryRestController {
         return categoryService.add(categoryResource);
     }
 
+    @PutMapping("/{id}")
+    public CategoryResource editCategory(@RequestBody CategoryResource categoryResource, @PathVariable Long id) {
+        categoryResource.setId(id);
+        return categoryService.update(categoryResource);
+    }
+
 }
