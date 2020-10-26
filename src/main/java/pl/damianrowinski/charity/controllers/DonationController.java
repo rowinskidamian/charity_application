@@ -35,6 +35,6 @@ public class DonationController {
     @PostMapping("/donation/form")
     public String sendForm(@ModelAttribute("donation") Donation donation) {
         donationService.add(donation);
-        return "redirect:/";
+        return "donation_form_confirmation";
     }
 }
