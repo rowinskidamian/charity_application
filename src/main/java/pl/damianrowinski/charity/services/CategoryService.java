@@ -26,8 +26,10 @@ public class CategoryService {
         return optionalCategory.get();
     }
 
-    public void add(Category category) {
-        categoryRepository.save(category);
+    public CategoryResource add(CategoryResource categoryResource) {
+        Category category = categoryAssembler.getCategoryToAdd(categoryResource);
+        Category savedCategory = categoryRepository.save(category);
+        return categoryAssembler.getCategoryResource(savedCategory);
     }
 
     public void update(Category categoryUpdate) {

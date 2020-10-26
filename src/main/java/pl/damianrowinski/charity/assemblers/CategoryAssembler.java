@@ -20,4 +20,18 @@ public class CategoryAssembler {
                 .map(category -> modelMapper.map(category, CategoryResource.class))
                 .collect(Collectors.toList());
     }
+
+    public Category getCategory(CategoryResource categoryResource) {
+        return modelMapper.map(categoryResource, Category.class);
+    }
+
+    public CategoryResource getCategoryResource(Category category) {
+        return modelMapper.map(category, CategoryResource.class);
+    }
+
+    public Category getCategoryToAdd(CategoryResource categoryResource) {
+        Category category = new Category();
+        category.setName(categoryResource.getName());
+        return category;
+    }
 }

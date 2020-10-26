@@ -1,6 +1,5 @@
 package pl.damianrowinski.charity.services;
 
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import pl.damianrowinski.charity.assemblers.CategoryAssembler;

@@ -1,9 +1,7 @@
 package pl.damianrowinski.charity.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.services.CategoryService;
 
@@ -18,6 +16,11 @@ public class CategoryRestController {
     @GetMapping()
     public List<CategoryResource> getCategories() {
         return categoryService.findAll();
+    }
+
+    @PostMapping()
+    public CategoryResource saveCategory(@RequestBody CategoryResource categoryResource) {
+        return categoryService.add(categoryResource);
     }
 
 }
