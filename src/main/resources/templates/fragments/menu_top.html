@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Top</title>
+</head>
+<body>
+
+<nav class="container container--70" th:fragment="menu_top">
+    <ul class="nav--actions">
+        <li><a href="?lang=en" class="btn btn--small btn--without-border">EN</a></li>
+        <li><a href="?lang=pl" class="btn btn--small btn--without-border">PL</a></li>
+    </ul>
+
+    <ul>
+        <li><a href="#" class="btn btn--without-border" th:text="#{header.start}">Start</a></li>
+        <li><a th:href="@{/donation/form}" class="btn btn--without-border active" th:text="#{header.give.gift}">Przekaż
+            dar</a></li>
+        <li><a href="#" class="btn btn--without-border" th:text="#{header.what.is.it}">O co chodzi?</a></li>
+        <li><a href="#" class="btn btn--without-border" th:text="#{header.foundation.organization}">
+            Fundacje i organizacje</a></li>
+        <li><a href="#" class="btn btn--without-border" th:text="#{header.contact}">Kontakt</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

@@ -4,25 +4,17 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Error</title>
+    <title>Formularz przekazania daru</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<header class="header--main-page" th:include="fragments/home_header :: pageheader"></header>
 
-<section class="steps">
-    <div class="steps--container">
-        <div class="steps--item" >
-            <h3 th:text="#{error}">Błąd</h3>
-            <p th:text="#{${errorMsg}}">Wystąpił błąd na stronie.</p>
-        </div>
-    </div>
-
-</section>
+<header class="header--form-page" th:include="fragments/form_header :: pageconfirmation"></header>
 
 <footer th:include="fragments/footer :: pagefooter"></footer>
 
 <script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/form_summary.js}"></script>
 
 </body>
 </html>

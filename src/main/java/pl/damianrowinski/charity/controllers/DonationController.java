@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Donation;
 import pl.damianrowinski.charity.domain.entities.Institution;
+import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.services.CategoryService;
 import pl.damianrowinski.charity.services.DonationService;
 import pl.damianrowinski.charity.services.InstitutionService;
@@ -24,7 +24,7 @@ public class DonationController {
 
     @GetMapping("/donation/form")
     public String generateForm(Model model) {
-        List<Category> categoryList = categoryService.findAll();
+        List<CategoryResource> categoryList = categoryService.findAll();
         List<Institution> institutionList = institutionService.findAll();
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("institutionList", institutionList);
@@ -35,6 +35,6 @@ public class DonationController {
     @PostMapping("/donation/form")
     public String sendForm(@ModelAttribute("donation") Donation donation) {
         donationService.add(donation);
-        return "redirect:/";
+        return "donation_form_confirmation";
     }
 }

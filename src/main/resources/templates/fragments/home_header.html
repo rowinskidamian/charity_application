@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<body>
+<header class="header--main-page" th:fragment="pageheader">
+    <nav class="container container--70" th:include="fragments/menu_top :: menu_top">
+    </nav>
+
+    <div class="slogan container container--90">
+        <div class="slogan--item">
+            <h1 th:text="#{header.start.help}">Zacznij pomagać!</h1><br>
+            <h1 th:text="#{header.start.help.subtitle}">Oddaj niechciane rzeczy w zaufane ręce</h1>
+
+        </div>
+    </div>
+</header>
+</body>
+</html>
