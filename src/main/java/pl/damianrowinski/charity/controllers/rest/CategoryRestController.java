@@ -13,18 +13,18 @@ import java.util.List;
 public class CategoryRestController {
     private final CategoryService categoryService;
 
-    @GetMapping()
+    @GetMapping
     public List<CategoryResource> getCategories() {
         return categoryService.findAll();
     }
 
     @GetMapping("/{id}")
-    public CategoryResource getSingleCategory(@PathVariable Long id){
+    public CategoryResource getSingleCategory(@PathVariable Long id) {
 
         return categoryService.findById(id);
     }
 
-    @PostMapping()
+    @PostMapping
     public CategoryResource saveCategory(@RequestBody CategoryResource categoryResource) {
         return categoryService.add(categoryResource);
     }
@@ -33,6 +33,11 @@ public class CategoryRestController {
     public CategoryResource editCategory(@RequestBody CategoryResource categoryResource, @PathVariable Long id) {
         categoryResource.setId(id);
         return categoryService.update(categoryResource);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryService.delete(id);
     }
 
 }

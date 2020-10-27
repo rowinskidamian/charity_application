@@ -1,6 +1,7 @@
 package pl.damianrowinski.charity.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.entities.Institution;
@@ -17,19 +18,15 @@ public class HomeController {
     private final DonationService donationService;
 
     @ModelAttribute("institutionsPairsList")
-    public List<List<Institution>> institutionsList() {
+    public List<Pair<Institution, Institution>> institutionsList() {
         List<Institution> allInstitutions = institutionService.findAll();
-        List<Institution> institutionsPair = new ArrayList<>();
-        List<List<Institution>> instPairList = new ArrayList<>();
+        List<Pair<Institution, Institution>> instPairList = new ArrayList<>();
 
         for (int i = 1; i <= allInstitutions.size(); i++) {
-            if(i%2 != 0) {
-                institutionsPair = new ArrayList<>();
-                institutionsPair.add(allInstitutions.get(i-1));
-            } else {
-                institutionsPair.add(allInstitutions.get(i-1));
-                instPairList.add(institutionsPair);
-            }
+            Institution institution1 = allInstitutions.get(i - 1);
+            Institution institution2 = allInstitutions.get(i);
+            instPairList.add(Pair.of(institution1, institution2));
+            i++;
         }
         return instPairList;
     }

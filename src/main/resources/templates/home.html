@@ -76,9 +76,17 @@
 
         <ul class="help--slides-items">
             <li th:each="institutionsPair : ${institutionsPairsList}">
-                <div class="col" th:each="institution : ${institutionsPair}">
-                    <div class="title" th:text="#{foundation.name} + ' ' + ${institution.getName()}"></div>
-                    <div class="subtitle" th:text="#{foundation.mission} + ' ' +${institution.getDescription()}"></div>
+                <div class="col">
+                    <div class="title" 
+                         th:text="#{foundation.name} + ' ' + ${institutionsPair.getFirst().getName()}"></div>
+                    <div class="subtitle"
+                         th:text="#{foundation.mission} + ' ' +${institutionsPair.getFirst().getDescription()}"></div>
+                </div>
+                <div class="col">
+                    <div class="title"
+                         th:text="#{foundation.name} + ' ' + ${institutionsPair.getFirst().getName()}"></div>
+                    <div class="subtitle"
+                         th:text="#{foundation.mission} + ' ' +${institutionsPair.getFirst().getDescription()}"></div>
                 </div>
             </li>
 
