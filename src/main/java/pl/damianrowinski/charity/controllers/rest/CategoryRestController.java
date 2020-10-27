@@ -21,7 +21,6 @@ public class CategoryRestController {
 
     @GetMapping("/{id}")
     public CategoryResource getSingleCategory(@PathVariable Long id) {
-
         return categoryService.findById(id);
     }
 
