@@ -20,8 +20,7 @@ public class DonationAssembler {
     public List<DonationResource> getResourceList(List<Donation> listToConvert) {
         List<DonationResource> donationResourceList = new ArrayList<>();
         for (Donation donation : listToConvert) {
-            DonationResource donationResource = modelMapper.map(donation, DonationResource.class);
-            convertCategoryListToResourceList(donation, donationResource);
+            DonationResource donationResource = getResource(donation);
             donationResourceList.add(donationResource);
         }
         return donationResourceList;
@@ -33,5 +32,25 @@ public class DonationAssembler {
                 .map(category -> modelMapper.map(category, CategoryResource.class))
                 .collect(Collectors.toList());
         donationResourceToSet.setCategories(categoryResources);
+    }
+
+    public DonationResource getResource(Donation donation) {
+        DonationResource donationResource = modelMapper.map(donation, DonationResource.class);
+        convertCategoryListToResourceList(donation, donationResource);
+        return donationResource;
+    }
+
+    public Donation getDonation(DonationResource resourceToConvert) {
+        Donation donation = modelMapper.map(resourceToConvert, Donation.class);
+        convertResourceListToCategoryList(resourceToConvert, donation);
+        return donation;
+    }
+
+    private void convertResourceListToCategoryList(DonationResource donationSource, Donation donationToSet) {
+        List<CategoryResource> categoryResourceList = donationSource.getCategories();
+        List<Category> categoryList = categoryResourceList.stream()
+                .map(categoryResource -> modelMapper.map(categoryResource, Category.class))
+                .collect(Collectors.toList());
+        donationToSet.setCategories(categoryList);
     }
 }

@@ -21,25 +21,31 @@ public class DonationService {
     private final DonationRepository donationRepository;
     private final DonationAssembler donationAssembler;
 
-    public Donation findById(Long id) {
-        Optional<Donation> optionalDonation = donationRepository.findById(id);
-        if (optionalDonation.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
-
-        return optionalDonation.get();
+    public DonationResource findById(Long id) {
+        Donation donation = getDonationByIdOrThrow(id);
+        return donationAssembler.getResource(donation);
     }
 
-    public void add(Donation donation) {
-        donationRepository.save(donation);
+    public DonationResource findByIdWithCategories(Long id) {
+        Optional<Donation> optionalDonation = donationRepository.findByIdWithCategories(id);
+        if (optionalDonation.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
+        return donationAssembler.getResource(optionalDonation.get());
+    }
+
+    public DonationResource add(DonationResource donationToAdd) {
+        Donation donation = donationAssembler.getDonation(donationToAdd);
+        Donation savedDonation = donationRepository.save(donation);
+        return donationAssembler.getResource(savedDonation);
     }
 
     public void update(Donation donationUpdated) {
-        Donation donationToUpdate = findById(donationUpdated.getId());
+        DonationResource donationToUpdate = findById(donationUpdated.getId());
         donationUpdated.setId(donationToUpdate.getId());
         donationRepository.save(donationUpdated);
     }
 
     public void delete(Long id) {
-        Donation donation = findById(id);
+        Donation donation = getDonationByIdOrThrow(id);
         donationRepository.delete(donation);
     }
 
@@ -63,5 +69,13 @@ public class DonationService {
                 .map(DonationResource::getQuantity)
                 .reduce(0, Integer::sum);
     }
+
+    private Donation getDonationByIdOrThrow(Long id) {
+        Optional<Donation> optionalDonation = donationRepository.findById(id);
+        if (optionalDonation.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
+        return optionalDonation.get();
+    }
+
+
 
 }

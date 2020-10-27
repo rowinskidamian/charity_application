@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
-//@ControllerAdvice(annotations = Controller.class)
+@ControllerAdvice(annotations = Controller.class)
 @Slf4j
 public class ExceptionsHandlerController {
 
     private static final String ERROR_PAGE_ATTRIBUTE = "errorMsg";
-    private static final String ERROR_PAGE_VIEW = "/error";
+    private static final String ERROR_PAGE_VIEW = "/error_page";
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public String handleNotFoundException(Exception e, Model model) {

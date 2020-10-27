@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.damianrowinski.charity.domain.entities.Donation;
 import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
+import pl.damianrowinski.charity.domain.resource.DonationResource;
 import pl.damianrowinski.charity.services.CategoryService;
 import pl.damianrowinski.charity.services.DonationService;
 import pl.damianrowinski.charity.services.InstitutionService;
@@ -33,7 +34,7 @@ public class DonationController {
     }
 
     @PostMapping("/donation/form")
-    public String sendForm(@ModelAttribute("donation") Donation donation) {
+    public String sendForm(@ModelAttribute("donation") DonationResource donation) {
         donationService.add(donation);
         return "donation_form_confirmation";
     }

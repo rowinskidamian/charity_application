@@ -1,9 +1,7 @@
 package pl.damianrowinski.charity.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.resource.DonationResource;
 import pl.damianrowinski.charity.services.DonationService;
 
@@ -20,5 +18,17 @@ public class DonationRestController {
     public List<DonationResource> getList () {
         return donationService.findAllWithCategories();
     }
+
+    @GetMapping("/{id}")
+    public DonationResource findDonation(@PathVariable Long id) {
+        return donationService.findByIdWithCategories(id);
+    }
+
+    @PostMapping
+    public DonationResource saveDonation(@RequestBody DonationResource donationToSave) {
+        return donationService.add(donationToSave);
+    }
+
+
 
 }
