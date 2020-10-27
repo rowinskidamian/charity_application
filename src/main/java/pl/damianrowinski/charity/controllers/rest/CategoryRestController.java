@@ -1,6 +1,7 @@
 package pl.damianrowinski.charity.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.services.CategoryService;
@@ -8,7 +9,7 @@ import pl.damianrowinski.charity.services.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 @RequiredArgsConstructor
 public class CategoryRestController {
     private final CategoryService categoryService;
@@ -35,6 +36,7 @@ public class CategoryRestController {
         return categoryService.update(categoryResource);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);

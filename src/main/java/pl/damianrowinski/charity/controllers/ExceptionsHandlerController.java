@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
-@ControllerAdvice(annotations = Controller.class)
+//@ControllerAdvice(annotations = Controller.class)
 @Slf4j
 public class ExceptionsHandlerController {
 

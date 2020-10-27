@@ -1,4 +1,4 @@
-package pl.damianrowinski.charity.rest;
+package pl.damianrowinski.charity.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.List;
 @RestController // @Controller + @ResponseBody na wszystkich metoda
 @RequestMapping("/api/institutions") // ścieżka wyraża jaki zasób przetwarzamy
 @Slf4j @RequiredArgsConstructor
-public class InstitutionController {
+public class InstitutionRestController {
 
     private final InstitutionRepository institutionRepository;
 
