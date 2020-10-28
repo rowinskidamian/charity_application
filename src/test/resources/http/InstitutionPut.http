@@ -1,0 +1,7 @@
+PUT http://localhost:8080/api/institution/50
+Content-Type: application/json
+
+{
+  "name": "zmieniona fundacja Putem",
+  "description": "zmieniony opis fundacji putem"
+}

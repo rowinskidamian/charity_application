@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.damianrowinski.charity.domain.entities.Donation;
-import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.domain.resource.DonationResource;
+import pl.damianrowinski.charity.domain.resource.InstitutionResource;
 import pl.damianrowinski.charity.services.CategoryService;
 import pl.damianrowinski.charity.services.DonationService;
 import pl.damianrowinski.charity.services.InstitutionService;
@@ -26,7 +26,7 @@ public class DonationController {
     @GetMapping("/donation/form")
     public String generateForm(Model model) {
         List<CategoryResource> categoryList = categoryService.findAll();
-        List<Institution> institutionList = institutionService.findAll();
+        List<InstitutionResource> institutionList = institutionService.findAll();
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("institutionList", institutionList);
         model.addAttribute("donation", new Donation());

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pl.damianrowinski.charity.domain.entities.Institution;
+import pl.damianrowinski.charity.domain.resource.InstitutionResource;
 import pl.damianrowinski.charity.services.DonationService;
 import pl.damianrowinski.charity.services.InstitutionService;
 
@@ -18,13 +18,13 @@ public class HomeController {
     private final DonationService donationService;
 
     @ModelAttribute("institutionsPairsList")
-    public List<Pair<Institution, Institution>> institutionsList() {
-        List<Institution> allInstitutions = institutionService.findAll();
-        List<Pair<Institution, Institution>> instPairList = new ArrayList<>();
+    public List<Pair<InstitutionResource, InstitutionResource>> institutionsList() {
+        List<InstitutionResource> allInstitutions = institutionService.findAll();
+        List<Pair<InstitutionResource, InstitutionResource>> instPairList = new ArrayList<>();
 
         for (int i = 1; i <= allInstitutions.size(); i++) {
-            Institution institution1 = allInstitutions.get(i - 1);
-            Institution institution2 = allInstitutions.get(i);
+            InstitutionResource institution1 = allInstitutions.get(i - 1);
+            InstitutionResource institution2 = allInstitutions.get(i);
             instPairList.add(Pair.of(institution1, institution2));
             i++;
         }
@@ -45,6 +45,4 @@ public class HomeController {
     public String homePage() {
         return "home";
     }
-
-
 }

@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/institution
+Content-Type: application/json
+
+{
+  "name": "Testowa fundacja",
+  "description": "Testowy opis fundacji"
+}
