@@ -1,5 +1,6 @@
 package pl.damianrowinski.charity.services;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import pl.damianrowinski.charity.assemblers.CategoryAssembler;
@@ -15,28 +16,51 @@ import static org.mockito.Mockito.*;
 class CategoryServiceTest {
 
     private ModelMapper modelMapper = new ModelMapper();
+    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
+    private CategoryAssembler categoryAssembler;
+    private Category category1;
+    private Category category2;
+
+    @BeforeEach
+    void init() {
+        categoryRepository = mock(CategoryRepository.class);
+        categoryAssembler = mock(CategoryAssembler.class);
+        categoryService = new CategoryService(categoryRepository, categoryAssembler);
+        category1 = new Category();
+        category2 = new Category();
+    }
 
     @Test
-    void shouldReturnListOfCategoriesResources() {
+    void givenIdShouldReturnResource() {
         //given
-        Category cat1 = new Category();
-        cat1.setId(1);
-        Category cat2 = new Category();
-        cat2.setId(2);
-        List<Category> categoryList = List.of(cat1, cat2);
+        long id = 1L;
+        category1.setId(id);
+        CategoryResource categoryResource = modelMapper.map(category1, CategoryResource.class);
+        when(categoryRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(category1));
+        when(categoryAssembler.getCategoryResource(category1)).thenReturn(categoryResource);
 
-        CategoryResource cat1res = modelMapper.map(cat1, CategoryResource.class);
-        CategoryResource cat2res = modelMapper.map(cat2, CategoryResource.class);
+        //when
+        CategoryResource categoryResourceFound = categoryService.findById(id);
+
+        //then
+        assertThat(categoryResourceFound).isEqualTo(categoryResource);
+
+    }
+
+    @Test
+    void usingFindAllShouldReturnListOfCategoriesResources() {
+        //given
+        List<Category> categoryList = List.of(category1, category2);
+
+        CategoryResource cat1res = modelMapper.map(category1, CategoryResource.class);
+        CategoryResource cat2res = modelMapper.map(category2, CategoryResource.class);
 
         List<CategoryResource> categoryResourceList = List.of(cat1res, cat2res);
-
-        CategoryRepository categoryRepository = mock(CategoryRepository.class);
-        CategoryAssembler categoryAssembler = mock(CategoryAssembler.class);
         when(categoryRepository.findAll()).thenReturn(categoryList);
         when(categoryAssembler.getResourceList(categoryList)).thenReturn(categoryResourceList);
 
         //when
-        CategoryService categoryService = new CategoryService(categoryRepository, categoryAssembler);
         List<CategoryResource> returnedList = categoryService.findAll();
 
         //then
