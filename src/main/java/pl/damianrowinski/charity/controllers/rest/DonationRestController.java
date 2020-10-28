@@ -29,6 +29,12 @@ public class DonationRestController {
         return donationService.add(donationToSave);
     }
 
+    @PutMapping("/{id}")
+    public DonationResource editDonatio(@RequestBody DonationResource donationToUpdate, @PathVariable Long id) {
+        donationToUpdate.setId(id);
+        return donationService.update(donationToUpdate);
+    }
+
 
 
 }

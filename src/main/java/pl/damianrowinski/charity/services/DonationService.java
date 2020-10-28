@@ -38,10 +38,11 @@ public class DonationService {
         return donationAssembler.getResource(savedDonation);
     }
 
-    public void update(Donation donationUpdated) {
-        DonationResource donationToUpdate = findById(donationUpdated.getId());
-        donationUpdated.setId(donationToUpdate.getId());
-        donationRepository.save(donationUpdated);
+    public DonationResource update(DonationResource donationUpdated) {
+        findById(donationUpdated.getId());
+        Donation donation = donationAssembler.getDonation(donationUpdated);
+        Donation updatedDonation = donationRepository.save(donation);
+        return donationAssembler.getResource(updatedDonation);
     }
 
     public void delete(Long id) {
