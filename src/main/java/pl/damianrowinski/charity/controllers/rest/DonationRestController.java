@@ -1,6 +1,7 @@
 package pl.damianrowinski.charity.controllers.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.resource.DonationResource;
 import pl.damianrowinski.charity.services.DonationService;
@@ -30,11 +31,15 @@ public class DonationRestController {
     }
 
     @PutMapping("/{id}")
-    public DonationResource editDonatio(@RequestBody DonationResource donationToUpdate, @PathVariable Long id) {
+    public DonationResource editDonation(@RequestBody DonationResource donationToUpdate, @PathVariable Long id) {
         donationToUpdate.setId(id);
         return donationService.update(donationToUpdate);
     }
-
+    
+    @DeleteMapping("/{id}")
+    public void deleteDonation(@PathVariable Long id) {
+        donationService.delete(id);
+    }
 
 
 }
