@@ -107,6 +107,42 @@ class CategoryServiceTest {
         }
     }
 
+    @DisplayName("Testing update(CategoryResource cs) method")
+    @Nested
+    class Update{
+        @Test
+        void givenResourceToUpdateShouldReturnUpdated() {
+            CategoryResource categoryResource = modelMapper.map(category1, CategoryResource.class);
+            categoryResource.setId(1L);
+            category1.setId(1L);
+            when(categoryRepository.findById(1L)).thenReturn(ofNullable(category1));
+            when(categoryAssembler.getCategoryResource(category1)).thenReturn(categoryResource);
+            when(categoryAssembler.getCategory(categoryResource)).thenReturn(category1);
+            when(categoryRepository.save(category1)).thenReturn(category1);
+
+            CategoryResource returned = categoryService.update(categoryResource);
+
+            assertThat(returned).isEqualTo(categoryResource);
+        }
+    }
+
+    @DisplayName("Testing delete(Long id)")
+    @Nested
+    class Delete{
+        @Test
+        void shouldUseDeleteInRepository() {
+            CategoryResource categoryResource = modelMapper.map(category1, CategoryResource.class);
+            categoryResource.setId(1L);
+            category1.setId(1L);
+            when(categoryRepository.findById(1L)).thenReturn(ofNullable(category1));
+            when(categoryAssembler.getCategoryResource(category1)).thenReturn(categoryResource);
+
+            categoryService.delete(1L);
+
+            Mockito.verify(categoryRepository, Mockito.atLeastOnce()).delete(ArgumentMatchers.any());
+        }
+    }
+
     @DisplayName("Testing findAll() method")
     @Nested
     class FindAll {
