@@ -22,7 +22,7 @@ public class CategoryService {
 
     public CategoryResource findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.category");
+        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
         return categoryAssembler.getCategoryResource(optionalCategory.get());
     }
 
