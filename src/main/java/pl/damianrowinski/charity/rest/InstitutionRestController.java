@@ -1,11 +1,9 @@
-package pl.damianrowinski.charity.controllers.rest;
+package pl.damianrowinski.charity.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.repositories.InstitutionRepository;
 import pl.damianrowinski.charity.domain.resource.InstitutionResource;
 import pl.damianrowinski.charity.services.InstitutionService;

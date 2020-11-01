@@ -6,7 +6,6 @@ import pl.damianrowinski.charity.assemblers.InstitutionAssembler;
 import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.repositories.InstitutionRepository;
 import pl.damianrowinski.charity.domain.resource.InstitutionResource;
-import pl.damianrowinski.charity.exceptions.ObjectNotFoundApiException;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
 import javax.transaction.Transactional;
@@ -28,7 +27,7 @@ public class InstitutionService {
     public InstitutionResource findByIdForApi(Long id) {
         return institutionRepository.findById(id)
                 .map(institutionAssembler::getResource)
-                .orElseThrow(() -> new ObjectNotFoundApiException("Institution not found for id:" + id));
+                .orElseThrow(() -> new ObjectNotFoundException("Institution not found for id:" + id));
     }
 
     public InstitutionResource save(InstitutionResource institutionToSaveData) {
@@ -39,6 +38,6 @@ public class InstitutionService {
 
     public void delete(Long id) {
         institutionRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundApiException("Institution not found for id:" + id));
+                .orElseThrow(() -> new ObjectNotFoundException("Institution not found for id:" + id));
     }
 }

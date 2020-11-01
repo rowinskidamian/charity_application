@@ -1,4 +1,4 @@
-package pl.damianrowinski.charity.controllers.rest;
+package pl.damianrowinski.charity.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
