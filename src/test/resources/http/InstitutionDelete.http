@@ -1,1 +1,1 @@
-DELETE http://localhost:8080/api/institution/112
+DELETE http://localhost:8080/api/institution/2

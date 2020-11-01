@@ -28,7 +28,7 @@ public class InstitutionRestController {
 
     @GetMapping("/{id}")
     public InstitutionResource getOne(@PathVariable Long id) {
-        return institutionService.findByIdForApi(id);
+        return institutionService.findResourceById(id);
     }
 
     @PostMapping
@@ -38,7 +38,7 @@ public class InstitutionRestController {
 
     @PutMapping("/{id}")
     public InstitutionResource updateOne(@RequestBody InstitutionResource institution, @PathVariable Long id) {
-        InstitutionResource institutionResource = institutionService.findByIdForApi(id);
+        InstitutionResource institutionResource = institutionService.findResourceById(id);
         if (institutionResource != null)
             institution.setId(id);
         return institutionService.save(institution);

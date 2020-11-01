@@ -26,6 +26,7 @@ class CategoryServiceTest {
     private CategoryRepository categoryRepository;
     private CategoryService categoryService;
     private CategoryAssembler categoryAssembler;
+    private DonationService donationService;
     private Category category1;
     private Category category2;
 
@@ -33,7 +34,8 @@ class CategoryServiceTest {
     void init() {
         categoryRepository = mock(CategoryRepository.class);
         categoryAssembler = mock(CategoryAssembler.class);
-        categoryService = new CategoryService(categoryRepository, categoryAssembler);
+        donationService = mock(DonationService.class);
+        categoryService = new CategoryService(categoryRepository, categoryAssembler, donationService);
         category1 = new Category();
         category2 = new Category();
     }

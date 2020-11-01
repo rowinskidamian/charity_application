@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.damianrowinski.charity.exceptions.ObjectInRelationshipException;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice(basePackages = "pl.damianrowinski.charity.rest")
@@ -16,6 +17,14 @@ public class ExceptionHandlerRestController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String objectNotFoundStatus(ObjectNotFoundException ex) {
         log.error("Raised ObjectNotFoundApiException");
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler({ObjectInRelationshipException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String objectInRelationship(ObjectInRelationshipException ex) {
+        log.error("Raised ObjectInRelationshipException");
         return ex.getMessage();
     }
 

@@ -5,11 +5,14 @@ import org.springframework.stereotype.Service;
 import pl.damianrowinski.charity.assemblers.InstitutionAssembler;
 import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.repositories.InstitutionRepository;
+import pl.damianrowinski.charity.domain.resource.DonationResource;
 import pl.damianrowinski.charity.domain.resource.InstitutionResource;
+import pl.damianrowinski.charity.exceptions.ObjectInRelationshipException;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,26 +21,35 @@ public class InstitutionService {
 
     private final InstitutionRepository institutionRepository;
     private final InstitutionAssembler institutionAssembler;
+    private final DonationService donationService;
 
     public List<InstitutionResource> findAll() {
         List<Institution> institutionList = institutionRepository.findAll();
         return institutionAssembler.getResourceList(institutionList);
     }
 
-    public InstitutionResource findByIdForApi(Long id) {
-        return institutionRepository.findById(id)
-                .map(institutionAssembler::getResource)
-                .orElseThrow(() -> new ObjectNotFoundException("Institution not found for id:" + id));
+    public InstitutionResource findResourceById(Long id) {
+        return institutionAssembler.getResource(findById(id));
     }
 
     public InstitutionResource save(InstitutionResource institutionToSaveData) {
-        Institution institutionToSave =  institutionAssembler.getInstitution(institutionToSaveData);
+        Institution institutionToSave = institutionAssembler.getInstitution(institutionToSaveData);
         Institution savedInstitution = institutionRepository.save(institutionToSave);
         return institutionAssembler.getResource(savedInstitution);
     }
 
     public void delete(Long id) {
-        institutionRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Institution not found for id:" + id));
+        Institution institution = findById(id);
+        Optional<DonationResource> optionalDonationResource = donationService.findDonationByInstitution(institution);
+
+        if (optionalDonationResource.isPresent())
+            throw new ObjectInRelationshipException("exception.institution.in.relationship");
+        institutionRepository.delete(institution);
+    }
+
+    private Institution findById(Long id) {
+        Optional<Institution> optionalInstitution = institutionRepository.findById(id);
+        if (optionalInstitution.isEmpty()) throw new ObjectNotFoundException("not.found.institution");
+        return optionalInstitution.get();
     }
 }
