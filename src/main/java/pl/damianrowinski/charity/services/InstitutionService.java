@@ -47,7 +47,7 @@ public class InstitutionService {
         institutionRepository.delete(institution);
     }
 
-    private Institution findById(Long id) {
+    Institution findById(Long id) {
         Optional<Institution> optionalInstitution = institutionRepository.findById(id);
         if (optionalInstitution.isEmpty()) throw new ObjectNotFoundException("not.found.institution");
         return optionalInstitution.get();

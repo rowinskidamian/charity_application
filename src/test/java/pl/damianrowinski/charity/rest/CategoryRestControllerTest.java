@@ -3,7 +3,6 @@ package pl.damianrowinski.charity.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -115,7 +114,6 @@ class CategoryRestControllerTest {
     }
 
     @Test
-
     void shouldReturnOkWhenDeleteOnGivenPath() throws Exception{
         CategoryService categoryService = mock(CategoryService.class);
 
@@ -124,7 +122,5 @@ class CategoryRestControllerTest {
         mockMvc.perform(delete("/api/category/{id}", categoryId))
                 .andExpect(status().isOk());
     }
-
-
 
 }
