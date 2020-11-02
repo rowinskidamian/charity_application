@@ -3,7 +3,7 @@
 Charity application where you can add donations for people in need.
 
 <b>Coders goal:</b> build backend for already designed layout (graphics and CSS) and UX logic. 
-Stack: Java, Spring Boot, Thymeleaf (views), REST api, JUnit 5 tests, JavaScript. 
+Stack: Java, Spring Boot, Thymeleaf (views with i18n), REST api, JUnit 5 tests, JavaScript. 
 <b>Focus to use:</b> Thymeleaf(views), api endpoints (REST), testing (JUnit5). 
 
 <b>What was ready and implemented</b>: graphics, layout, CSS, JS (app.js).
