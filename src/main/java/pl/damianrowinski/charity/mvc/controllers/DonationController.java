@@ -1,11 +1,9 @@
-package pl.damianrowinski.charity.controllers;
+package pl.damianrowinski.charity.mvc.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.damianrowinski.charity.domain.entities.Donation;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
 import pl.damianrowinski.charity.domain.resource.DonationResource;
@@ -37,5 +35,12 @@ public class DonationController {
     public String sendForm(@ModelAttribute("donation") DonationResource donation) {
         donationService.add(donation);
         return "donation_form_confirmation";
+    }
+
+    @GetMapping("/donation/find/{id}")
+    @ResponseBody
+    public String findDonation(@PathVariable Long id) {
+        CategoryResource serviceById = categoryService.findById(id);
+        return serviceById.toString();
     }
 }

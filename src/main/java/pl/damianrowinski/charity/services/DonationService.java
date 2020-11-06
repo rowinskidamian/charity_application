@@ -3,7 +3,9 @@ package pl.damianrowinski.charity.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.damianrowinski.charity.assemblers.DonationAssembler;
+import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Donation;
+import pl.damianrowinski.charity.domain.entities.Institution;
 import pl.damianrowinski.charity.domain.repositories.DonationRepository;
 import pl.damianrowinski.charity.domain.resource.DonationResource;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
@@ -30,6 +32,22 @@ public class DonationService {
         Optional<Donation> optionalDonation = donationRepository.findByIdWithCategories(id);
         if (optionalDonation.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
         return donationAssembler.getResource(optionalDonation.get());
+    }
+
+    public Optional<DonationResource> findDonationByCategory(Category category) {
+        Optional<Donation> optionalDonation = donationRepository.findFirstByCategoriesContains(category);
+        return getDonationResourceFromOptional(optionalDonation);
+    }
+
+    public Optional<DonationResource> findDonationByInstitution(Institution institution) {
+        Optional<Donation> optionalDonation = donationRepository.findFirstByInstitution(institution);
+        return getDonationResourceFromOptional(optionalDonation);
+    }
+
+    private Optional<DonationResource> getDonationResourceFromOptional(Optional<Donation> optionalDonation) {
+        if (optionalDonation.isEmpty()) return Optional.empty();
+        DonationResource donationResource = donationAssembler.getResource(optionalDonation.get());
+        return Optional.of(donationResource);
     }
 
     public DonationResource add(DonationResource donationToAdd) {
@@ -76,7 +94,6 @@ public class DonationService {
         if (optionalDonation.isEmpty()) throw new ObjectNotFoundException("not.found.donation");
         return optionalDonation.get();
     }
-
 
 
 }

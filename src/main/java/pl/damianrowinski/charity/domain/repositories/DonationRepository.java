@@ -3,7 +3,9 @@ package pl.damianrowinski.charity.domain.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.entities.Donation;
+import pl.damianrowinski.charity.domain.entities.Institution;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,4 +20,8 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     @Query("SELECT d from Donation d join fetch d.categories WHERE d.id = ?1")
     Optional<Donation> findByIdWithCategories(Long id);
+
+    Optional<Donation> findFirstByCategoriesContains(Category category);
+
+    Optional<Donation> findFirstByInstitution(Institution institution);
 }

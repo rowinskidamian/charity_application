@@ -1,4 +1,4 @@
-package pl.damianrowinski.charity.controllers;
+package pl.damianrowinski.charity.mvc.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
@@ -24,7 +24,12 @@ public class HomeController {
 
         for (int i = 1; i <= allInstitutions.size(); i++) {
             InstitutionResource institution1 = allInstitutions.get(i - 1);
-            InstitutionResource institution2 = allInstitutions.get(i);
+            InstitutionResource institution2;
+
+            if (i < allInstitutions.size())
+                institution2 = allInstitutions.get(i);
+            else
+                institution2 = new InstitutionResource();
             instPairList.add(Pair.of(institution1, institution2));
             i++;
         }
@@ -45,4 +50,5 @@ public class HomeController {
     public String homePage() {
         return "home";
     }
+
 }

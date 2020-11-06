@@ -6,6 +6,8 @@ import pl.damianrowinski.charity.assemblers.CategoryAssembler;
 import pl.damianrowinski.charity.domain.entities.Category;
 import pl.damianrowinski.charity.domain.repositories.CategoryRepository;
 import pl.damianrowinski.charity.domain.resource.CategoryResource;
+import pl.damianrowinski.charity.domain.resource.DonationResource;
+import pl.damianrowinski.charity.exceptions.ObjectInRelationshipException;
 import pl.damianrowinski.charity.exceptions.ObjectNotFoundException;
 
 import javax.transaction.Transactional;
@@ -19,10 +21,11 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryAssembler categoryAssembler;
+    private final DonationService donationService;
 
     public CategoryResource findById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.category");
+        if (optionalCategory.isEmpty()) throw new ObjectNotFoundException("not.found.category");
         return categoryAssembler.getCategoryResource(optionalCategory.get());
     }
 
@@ -40,9 +43,11 @@ public class CategoryService {
         return categoryAssembler.getCategoryResource(savedCategory);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         CategoryResource categoryData = findById(id);
         Category categoryToDelete = categoryAssembler.getCategory(categoryData);
+        Optional<DonationResource> optionalDonationResource = donationService.findDonationByCategory(categoryToDelete);
+        if (optionalDonationResource.isPresent()) throw new ObjectInRelationshipException("exception.in.relationship");
         categoryRepository.delete(categoryToDelete);
     }
 

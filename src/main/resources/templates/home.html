@@ -82,11 +82,11 @@
                     <div class="subtitle"
                          th:text="#{foundation.mission} + ' ' +${institutionsPair.getFirst().getDescription()}"></div>
                 </div>
-                <div class="col">
+                <div class="col" th:if="${institutionsPair.getSecond().getName() ne null}">
                     <div class="title"
-                         th:text="#{foundation.name} + ' ' + ${institutionsPair.getFirst().getName()}"></div>
+                         th:text="#{foundation.name} + ' ' + ${institutionsPair.getSecond().getName()}"></div>
                     <div class="subtitle"
-                         th:text="#{foundation.mission} + ' ' +${institutionsPair.getFirst().getDescription()}"></div>
+                         th:text="#{foundation.mission} + ' ' +${institutionsPair.getSecond().getDescription()}"></div>
                 </div>
             </li>
 

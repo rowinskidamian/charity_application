@@ -11,7 +11,7 @@ public class InstitutionConverter implements Converter<String, InstitutionResour
 
     @Override
     public InstitutionResource convert(String source) {
-        return institutionService.findByIdForApi(Long.parseLong(source));
+        return institutionService.findResourceById(Long.parseLong(source));
     }
 
     @Autowired

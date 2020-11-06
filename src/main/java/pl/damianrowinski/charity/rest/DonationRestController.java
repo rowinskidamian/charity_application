@@ -1,4 +1,4 @@
-package pl.damianrowinski.charity.controllers.rest;
+package pl.damianrowinski.charity.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
